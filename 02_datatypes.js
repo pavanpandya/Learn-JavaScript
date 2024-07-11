@@ -8,8 +8,10 @@
 // Data Types in JavaScript:
 // ----------------------------------------------
 
+// These catgorization is based on how they are stored in memory. (Call by value or Call by reference)
+
 // 1. Primitive Data Types
-// 2. Non-Primitive Data Types
+// 2. Non-Primitive Data Types or Reference Type
 
 // 1. Primitive Data Types:
 // a. String
@@ -50,6 +52,10 @@ let sym = Symbol();
 console.log(sym); // Symbol()
 console.log(typeof sym); // symbol
 
+const id = Symbol('123');
+const anotherId = Symbol('123');
+console.log(id === anotherId); // false
+
 // g. BigInt: The max it can store is 2^53 - 1.
 let bigInt = 1234567890123456789012345678901234567890n;
 console.log(bigInt); // 1234567890123456789012345678901234567890n
@@ -85,7 +91,7 @@ console.log(typeof greet); // function
 
 // d. Date:
 let today = new Date();
-console.log(today); // 2021-09-10T17:38:31.000Z
+console.log(today); // 2024-07-11T05:17:06.329Z
 console.log(typeof today); // object
 
 // e. RegExp:
