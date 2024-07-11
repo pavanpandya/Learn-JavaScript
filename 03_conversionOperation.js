@@ -76,3 +76,33 @@ console.log(valueInString);
 // null => "null"
 // undefined => "undefined"
 
+// ------------------------------
+// Operations:
+// ------------------------------
+let num = 3
+let negNum = -num;
+console.log(negNum);
+
+console.log(3 + 4);
+console.log(3 - 4);
+console.log(3 * 4);
+console.log(3 / 4);
+console.log(3 ** 4); // 3^4
+console.log(3 % 4); // Remainder
+
+let str1 = "Hello";
+let str2 = "World!";
+let str3 = str1 + " " + str2;
+console.log(str3);
+
+// Tricky Operations:
+console.log(3 + "4"); // 34
+console.log("3" + 4); // 34
+console.log(3 + 4 + "5"); // 75
+console.log("3" + 4 + 5); // 345
+console.log(true) // true
+console.log(+true) // 1 (Unary Plus)
+
+let gameCounter = 100;
+gameCounter++;
+console.log(gameCounter); // 101
