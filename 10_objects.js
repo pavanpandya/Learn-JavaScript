@@ -67,3 +67,113 @@ console.log(JsUser.greeting);
 
 console.log(JsUser.greeting()); 
 console.log(JsUser.greeting2()); 
+
+const tinderUser = new Object();
+// const tinderUser = {};
+
+// We can use either way to create the object. It will gives us the same output.
+// The only difference is that the first one is a singleton object and the second one is not.
+
+tinderUser.id = 1;
+tinderUser.name = "Pavan";
+tinderUser.age = 22;
+tinderUser.location = "Bloomington";
+tinderUser.email = "pavan@gmail.com";
+tinderUser.isLoggedIn = false;
+
+console.log(tinderUser);
+
+const regularUser = {
+    email: "pavan@gmail.com",
+    fullname: {
+        userfullname: {
+            firstname: "Pavan",
+            lastname: "Pandya"
+        }
+    }
+}
+
+console.log(regularUser);
+// If we want to access the firstname, then we need to use the dot operator.
+console.log(regularUser.fullname.userfullname.firstname);
+
+// Optional Chaining:
+// It means that if the property is not available, then it will not throw the error.
+// It will return undefined.
+console.log(regularUser?.fullname?.userfullname?.firstname);
+
+// Combining Objects:
+
+const target={
+    1: "a",
+    2: "b",
+}
+
+const source={
+    3: "c",
+    4: "d",
+}
+
+// const obj3 = {target, source};
+// console.log(obj3); // Output: { target: { '1': 'a', '2': 'b' }, source: { '3': 'c', '4': 'd' } }
+// To fix this, we can use the spread operator.
+
+const obj3 = {...target, ...source};
+console.log(obj3); // Output: { '1': 'a', '2': 'b', '3': 'c', '4': 'd' }
+
+// Another way to combine the objects:
+const returnedTarget = Object.assign(target, source);
+console.log(returnedTarget); // Output: { '1': 'a', '2': 'b', '3': 'c', '4': 'd' }
+
+// OR
+// const returnedTarget = Object.assign({}, target, source);
+// console.log(returnedTarget); // Output: { '1': 'a', '2': 'b', '3': 'c', '4': 'd' }
+
+// NOTE: Either you pass the "{}" or not in the Object.assign() method, it will give the same output.
+// But it is recommended to pass the "{}" to have clear understanding that all objects are combined into the "{}" target object.
+// Otherwise, they will be combined into the target object itself.
+
+console.log(target === returnedTarget); // Output: true 
+
+const users = [
+    {
+        name: "Pavan",
+        age: 22,
+        location: "Bloomington",
+        email: "pavan@gmail.com"
+    },
+    {
+        name: "Deep",
+        age: 22,
+        location: "Ahmedabad",
+        email: "deep@gmail.com"
+    }
+]
+
+console.log(users);
+
+// Accessing the object properties of 2nd user:
+console.log(users[1].name);
+
+// Important Thing to note:
+console.log(tinderUser);
+
+console.log(Object.keys(tinderUser)); // Output: [ 'id', 'name', 'age', 'location', 'email', 'isLoggedIn' ]
+console.log(Object.values(tinderUser)); // Output: [ 1, 'Pavan', 22, 'Bloomington', 'pavan@gmail.com', false ]
+// Since the output is in the form of an array, we can use the loop to iterate over the object properties.
+
+console.log(Object.entries(tinderUser)); 
+// Output: [
+//   [ 'id', 1 ],
+//   [ 'name', 'Pavan' ],
+//   [ 'age', 22 ],
+//   [ 'location', 'Bloomington' ],
+//   [ 'email', 'pavan@gmail.com' ],
+//   [ 'isLoggedIn', false ]
+// ]
+// Here, the first element is the key and the second element is the value.
+
+// HasOwnProperty:
+// It is used to check whether the property is available in the object or not.
+console.log(tinderUser.hasOwnProperty("name")); // Output: true
+console.log(tinderUser.hasOwnProperty("fullname")); // Output: false   
