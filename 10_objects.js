@@ -177,3 +177,28 @@ console.log(Object.entries(tinderUser));
 // It is used to check whether the property is available in the object or not.
 console.log(tinderUser.hasOwnProperty("name")); // Output: true
 console.log(tinderUser.hasOwnProperty("fullname")); // Output: false   
+
+
+// More on Objects:
+const course = {
+    courseName: "JavaScript",
+    price: 1000,
+    courseIntructor: "Hitesh Choudhary"
+}
+
+// Destructuring: 
+// Structure:
+// const {key1, ...} = objectName;
+
+const {courseIntructor} = course;
+console.log(courseIntructor); // Output: Hitesh Choudhary
+
+// OR
+const {courseIntructor: instructor} = course;
+console.log(instructor); // Output: Hitesh Choudhary
+
+// NOTE: If we want to change the key name, then we can use the colon(:) operator.
+// How Destructing works and how it is useful in the real-time scenario?
+// It is used to extract the properties of the object and assign them to the variables.
+// It is used to avoid the dot operator to access the object properties.
+
