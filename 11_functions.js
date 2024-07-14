@@ -72,3 +72,57 @@ function loginUserMessage3(username = 'Guest'){
 
 console.log(loginUserMessage3()); // Welcome Guest, Have a nice day!
 console.log(loginUserMessage3("Deep")); // Welcome Deep, Have a nice day!
+
+// More on Functions: (Lecture-2)
+
+// Consider a scenario where you are not sure about the number of arguments that will be passed to the function.
+// function calculateCartTotal(productPrices){
+//     return productPrices;
+// }
+
+// console.log(calculateCartTotal(100, 200, 300, 400, 500)); // 100
+
+// In such cases, we can use the rest parameter.
+// It allows us to represent an indefinite number of arguments as an array.
+
+function calculateCartTotal(...productPrices){
+    return productPrices;
+}
+
+console.log(calculateCartTotal(100, 200, 300, 400, 500)); // [100, 200, 300, 400, 500]
+
+// Note: Here, you may get confused with the spread operator.
+// But, the spread operator is used to unpack elements from an array.
+// Whereas, the rest parameter is used to pack elements into an array.
+// The way they are used, helps to differentiate between them.
+
+// Passing Object as an Argument:
+const productDetail = {
+    productName: "Apple",
+    productPrice: 100
+}
+
+function displayProductDetails(product){
+    console.log(`Product name is ${product.productName} and its price is ${product.productPrice}.`);
+}
+
+displayProductDetails(productDetail); // Product name is Apple and its price is 100.
+
+// Points to remember:
+// There can be a case where even though the function is expecting an object as an argument, but you may pass a different type of argument.
+// Or the object properties that we are trying to access may not exist. In that case, we will get "undefined" as the output.
+
+// We can also pass the object directly
+displayProductDetails({
+    productName: "Banana",
+    productPrice: 50
+}); // Product name is Banana and its price is 50.
+
+// Passing Array as an Argument:
+const myNewArray = [10, 20, 30, 40, 50];
+
+function returnFirstElement(arr){
+    return arr[0];
+}
+
+console.log("First Element is: ", returnFirstElement(myNewArray)); // 10
