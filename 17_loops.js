@@ -423,5 +423,16 @@ console.log(values2); // undefined
 
 // Again, the value is undefined. This is because forEach loop does not return anything.
 
+// Now, the question is what if we want to use the forEach loop and return the values. Let's see how we can do that:
+
+let newNums3 = [];
+myNums.forEach( (item) => {
+    if (item > 5) {
+        newNums3.push(item);
+    }
+})
+
+console.log(newNums3); // Output: [ 6, 7, 8, 9, 10 ]
+
 // ---------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------
