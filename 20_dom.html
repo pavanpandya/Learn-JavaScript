@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture-2 On DOM</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <div class="parent">
+        <div class="day">Monday</div>
+        <div class="day">Tuesday</div>
+        <div class="day">Wednesday</div>
+        <div class="day">Thursday</div>
+    </div>
+</body>
+<script>
+    const parent = document.querySelector('.parent');
+    console.log(parent);
+    // Output: <div class="parent">…</div>
+
+    // Returns a HTMLCollection of the children of the parent element
+    console.log(parent.children);
+    // Output: HTMLCollection(4) [div.day, div.day, div.day, div.day]
+
+    // Print the value of Day-2
+    console.log(parent.children[1].innerHTML);
+    // Output: Tuesday
+
+    // Let's use for loop
+    for (let i = 0; i < parent.children.length; i++) {
+        console.log(parent.children[i].innerHTML);
+    }
+    // Output: 
+    // Monday 
+    // Tuesday 
+    // Wednesday 
+    // Thursday
+
+    console.log(parent.firstElementChild);
+    // Output: <div class="day">Monday</div>
+
+    console.log(parent.lastElementChild);
+    // Output: <div class="day">Thursday</div>
+
+    const dayOne = document.querySelector('.day')
+    console.log(dayOne)
+    // Output: <div class="day">Monday</div>
+
+    // Print the parent element of dayOne
+    console.log(dayOne.parentElement);
+    // Output: <div class="parent">…</div>
+
+    // It is not recommended to use the querySelector all the time since it is expensive to use it because it has to go through the entire DOM.
+
+    // Print the next sibling of dayOne
+    console.log(dayOne.nextElementSibling);
+    // Output: <div class="day">Tuesday</div>
+    
+    console.log("NODES: ", parent.childNodes);
+    // Output: NODES: NodeList(9) [text, div.day, text, div.day, text, div.day, text, div.day, text]
+
+    // Explanation: The output is a NodeList of 9 elements. The text nodes are also included in the NodeList. The text nodes are the white spaces between the div elements.
+    // If you add a comment in the HTML file, it will also be included in the NodeList.
+</script>
+</html> 

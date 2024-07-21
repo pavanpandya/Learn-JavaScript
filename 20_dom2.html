@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More on DOM</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    
+</body>
+<script>
+    const div = document.createElement('div');
+    console.log(div);
+    // Output: <div></div>
+
+    div.className = 'main';
+    div.id = Math.round(Math.random() * 10 + 1);
+
+    div.setAttribute('title', 'Learning DOM');
+    div.style.backgroundColor = "Orange";
+    div.style.padding = "10px";
+
+    // At this point, the div element is created but it is not visible on the page.
+    // Why? Because we have not added any text to it and we have not appended it to the body of the document.
+
+    // div.innerText = 'This is a div element';
+
+    // Important: People usually prefer to use setAttribute() method to set the attributes of an element. Because it directly sets the attribute of the element. Where as the innerText property first gets the element and then sets the text. So, it is better to use setAttribute() method to save one step.
+
+    const addText = document.createTextNode('This is a div element');
+    div.appendChild(addText);
+
+    // Now, append the div element to the body of the document
+    document.body.appendChild(div);
+
+</script>
+</html>
