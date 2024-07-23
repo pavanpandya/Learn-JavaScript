@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture on Events</title>
+</head>
+
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div>
+        <ul id="images">
+            <li><img width="200px" id="photoshop"
+                    src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt="photoshop"></li>
+            <li><img width="200px" id="japan"
+                    src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="river"
+                    src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="owl"
+                    src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><img width="200px" id="prayer"
+                    src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
+                    alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+    </div>
+</body>
+<script>
+    // Different ways to perform events in JavaScript:
+    // 1. Using HTML attributes
+    // Eg: <button onclick="alert('Hello World!')">Click me</button>
+    // This is not recommended as it becomes difficult when you scale your application.
+
+    // 2. Using the DOM event handler properties
+    // document.getElementById('owl').onclick = function () {
+    //     alert('You clicked on the owl image!');
+    // }
+    // Here, when we use the onclick event on the element, it might create a problem since we have less information about the event compared to the addEventListener() method.
+
+    // 3. Using the addEventListener() method - Best practice
+    // document.getElementById('owl').addEventListener('click', function () {
+    //     alert('You clicked on the owl image!');
+    // }, false);
+    // The addEventListener() method takes three arguments:
+    // 1. The event name (click, mouseover, mouseout, etc.)
+    // 2. The function to be executed when the event occurs
+    // 3. A boolean value that specifies whether the event should be executed in the event capturing or event bubbling phase. By default, it is set to false, which means the event is executed in the event bubbling phase.
+
+    // Earlier, we use to use attachEvent() method for IE browsers. But now, it is deprecated. So, we use addEventListener() method for all browsers.
+
+    // More on event object:
+    // The event object is passed to the event handler function as an argument. It contains information about the event that occurred.
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log(e);
+    //     // Output: PointerEvent {isTrusted: true, pointerId: 1, width: 1, height: 1, pressure: 0, …}
+    // }, false);
+
+    // Important properties of the event object:
+    // 1. type: The type of event that occurred (click, mouseover, mouseout, etc.)
+    // 2. target: The element that triggered the event
+    // 3. clientX: The horizontal coordinate of the mouse pointer when the event occurred
+    // 4. clientY: The vertical coordinate of the mouse pointer when the event occurred
+    // 5. pageX: The horizontal coordinate of the mouse pointer relative to the whole document
+    // 6. pageY: The vertical coordinate of the mouse pointer relative to the whole document
+    // 7. keyCode: The Unicode value of the key that was pressed
+    // 8. shiftKey: A boolean value that indicates whether the shift key was pressed
+    // 9. ctrlKey: A boolean value that indicates whether the control key was pressed
+    // 10. altKey: A boolean value that indicates whether the alt key was pressed
+    // 11. metaKey: A boolean value that indicates whether the meta key was pressed
+    // 12. preventDefault(): A method that prevents the default action of the event from occurring
+    // 13. stopPropagation(): A method that stops the event from bubbling up the DOM tree
+    // 14. parentNode: The parent node of the target element
+    // 15. currentTarget: The element that the event handler is attached to (useful when using event delegation)    
+    // 16. timeStamp: The time when the event occurred
+    // 17. srcElement: The element that triggered the event (IE only)
+
+    // Understanding event bubbling and event capturing:
+    // Event bubbling: When an event occurs on an element, it first runs the event handlers on it, then on its parent, then all the way up on other ancestors.
+    // In simple words, bubble niche se upar jaata hai. Tracks the element from inside to outside.
+    
+    // Event capturing: The event is first captured by the outermost element and propagated to the inner elements.
+    // To stop the event from bubbling up the DOM tree, we can use the stopPropagation() method.
+    // In simple words, capture upar se niche jaata hai. Tracks the element from outside to inside.
+
+    // When to use event bubbling and event capturing?
+    // Depends on the requirement. If you want to track the element from inside to outside, use event bubbling. If you want to track the element from outside to inside, use event capturing.
+
+    // document.getElementById('images').addEventListener('click', function(e){
+    //     console.log("You clicked on the images list!");
+    // }, false);
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     console.log("You clicked on the owl image!");
+    // }, false);
+
+    // (When you click on other image)
+    // Output: 
+    // You clicked on the images list!
+    
+    // (When you click on the owl image) - Event bubbling (Default  - false)
+    // Output: 
+    // You clicked on the owl image!
+    // You clicked on the images list!
+
+    // (When you click on the owl image) - Event capturing (true)
+    // Output: 
+    // You clicked on the images list!
+    // You clicked on the owl image!
+
+    // To stop the event from bubbling up the DOM tree, we can use the stopPropagation() method.
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     e.stopPropagation();
+    //     console.log("You clicked on the owl image!");
+    // }, false);
+
+    // Output: You clicked on the owl image!
+
+    document.getElementById('google').addEventListener('click', function(e){
+        e.preventDefault();
+        // Why?
+        // When you click on the Google link, it will redirect you to the Google page. But, we want to prevent that default action meaning we don't want to redirect to the Google page.
+
+        e.stopPropagation();
+        console.log("You clicked on the Google link!");
+    }, false);
+
+    // Output: You clicked on the Google link!
+
+    // Task: When you click on any image, it should be deleted from the list.
+    document.getElementById('images').addEventListener('click', function(e){
+        // console.log(e.target);
+        // I clicked on the photoshop image and this is the output:
+        // <img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop">
+
+        // console.log(e.target.parentNode);
+        // Output: <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+
+        // Why parentNode?
+        // We want to delete the image from the list. So, we need to access the parent node of the image element to delete the image from the list.
+
+        // let removeIt = e.target.parentNode;
+
+        // First Approach:
+        // removeIt.remove();
+
+        // Second Approach:
+        // removeIt.parentNode.removeChild(removeIt);
+        // The removeChild() method removes a specified child node of the specified element.
+
+        // Now, there is one more issue. If you click on any li element other than the image, it will delete the ul element (parent of li element). So, we need to check if the target element is an image or not.
+        if(e.target.tagName === 'IMG'){
+            let removeIt = e.target.parentNode;
+            removeIt.parentNode.removeChild(removeIt);
+            // Or removeIt.remove();
+        }
+    }, false);
+</script>
+</html>
