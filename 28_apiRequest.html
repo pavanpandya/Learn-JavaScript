@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture on API Request</title>
+</head>
+
+<body style="background-color: #212121; color: #fff;">
+    <!-- Earlier, we used to use the XMLHttpRequest object to make API requests. But now, we use the fetch API to make API requests.
+    
+    Doc on XMLHttpRequest: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+
+    The XMLHttpRequest.readyState property returns the state an XMLHttpRequest client is in. An XHR (XMLHttpRequest) client exists in one of the following states:
+
+    Value	State	Description
+    0	UNSENT	Client has been created. open() not called yet.
+    1	OPENED	open() has been called.
+    2	HEADERS_RECEIVED	send() has been called, and headers and status are available.
+    3	LOADING	Downloading; responseText holds partial data.
+    4	DONE	The operation is complete.  -->
+    <div class="container">
+        <h1>See the Magic</h1>
+        <form>
+            <label for="username">Enter your Github Username: </label>
+            <input type="text" name="username" id="username">
+            <button type="submit">Submit</button>
+        </form>
+        <div id="output"></div>
+    </div>
+</body>
+<script>
+    const URL = 'https://randomuser.me/api/';
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', URL);
+    xhr.onreadystatechange = function () {
+        console.log(xhr.readyState);
+        if (xhr.readyState === 4) {
+            // const data = this.responseText;
+            // console.log(data);
+            // console.log(typeof data); // string
+
+            // So, we need to parse the data to convert it into a JSON object
+            const data = JSON.parse(this.responseText);
+            console.log(data);
+            console.log(typeof data); // object
+        }
+    }
+    xhr.send();
+
+    // Task: Make an API request to the URL: api.github.com/users and have the profile phot and name of the user displayed on the webpage.
+    const form = document.querySelector('form');
+    const output = document.querySelector('#output');
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const username = document.querySelector('#username').value;
+        const URL = `https://api.github.com/users/${username}`;
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', URL);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                const data = JSON.parse(this.responseText);
+                console.log(data);
+                // Check if the user exists
+                if (data.message === 'Not Found' || data.name === null) {
+                    output.innerHTML = `<h2>User not found</h2>`;
+                } else {
+                    output.innerHTML = `
+                    <img src="${data.avatar_url}" alt="${data.name}" style="border-radius: 50%; width: 100px;">
+                    <h2>${data.name}</h2>
+                    `;
+                }
+            }
+        }
+        xhr.send();
+    });
+</script>
+
+</html>
