@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture-2 on Async</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <h1>Learning JS from Chai aur Code.</h1>
+    <button class="start">Start</button>
+    <button class="stop">Stop</button>
+</body>
+<script>
+    const printDate = function(){
+        console.log(new Date());
+    }
+    // setInterval(printDate, 1000);
+
+    const sayHello = function(str){
+        console.log(str);
+    }
+
+    // setInterval(sayHello, 1000, "Hello World!");
+
+    const printHello = setInterval(function(){
+        console.log("Hello World!");
+    }, 1000);
+
+    // Stopping the setInterval function
+    clearInterval(printHello);
+
+
+</script>
+</html>

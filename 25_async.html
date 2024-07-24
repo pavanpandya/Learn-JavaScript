@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture-2 on Async</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <h1>Hello World!</h1>
+    <button class="stop">Stop</button>
+</body>
+<script>
+    // setTimeout(function(){
+    //     console.log("Hi, I am from setTimeout");
+    // }, 2000);
+
+    // Prints the output in the console after 2 seconds
+    // Output: Hi, I am from setTimeout
+
+    // Another way to write the above code
+    const sayHello = () => {
+        console.log("Hi, I am from setTimeout");
+    }
+    setTimeout(sayHello, 2000);
+
+    // Prints the output in the console after 2 seconds
+    // Output: Hi, I am from setTimeout
+
+    // Note: You have to provide the reference of the function to the setTimeout function.
+
+    // clearTimeout function - to stop the setTimeout function
+    // It takes the reference of the setTimeout function as an argument.
+    const changeMe = setTimeout(function(){
+        document.querySelector('h1').innerHTML = "Hello World! I am changed";
+    }, 1000);
+
+    document.querySelector('.stop').addEventListener('click', () => {
+        clearTimeout(changeMe);
+        console.log("Stopped the setTimeout function");
+    });
+</script>
+</html>
