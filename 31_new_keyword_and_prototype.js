@@ -119,3 +119,105 @@ product2.printMe(); // laptop costs 1400
 // The constructor is called: The constructor function is called with the specified arguments and this is bound to the newly created object. If no explicit return value is specified from the constructor, JavaScript assumes this, the newly created object, to be the intended return value.
 
 // The new object is returned: After the constructor function has been called, if it doesn't return a non-primitive value (object, array, function, etc.), the newly created object is returned.
+
+// -----------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------
+
+// Lecture on Prototype:
+
+let myHeros = ["thor", "ironman", "captain america"];
+
+let heroPower = {
+    thor: "thunder",
+    ironman: "technology",
+    "captain america": "shield",
+    getIronManPower() {
+        return this.ironman;
+    }
+};
+
+console.log(heroPower.getIronManPower()); // technology
+
+// What if I write:
+// console.log(heroPower.pavan());
+
+Object.prototype.pavan = function () {
+    console.log("Hi, I am Pavan");
+};
+
+heroPower.pavan(); // Hi, I am Pavan
+
+// What if I write:
+myHeros.pavan(); // Hi, I am Pavan
+
+// We directly added a method to the Object prototype, so all objects in JavaScript inherit this method.
+// It is also accessible to arrays, because arrays are objects in JavaScript.
+
+// Let's check if we add a new prototype method to the Array, Will it be accessible to the objects?
+Array.prototype.deep = function () {
+    console.log("Hi, I am Deep");
+}
+
+myHeros.deep(); // Hi, I am Deep
+
+// heroPower.deep(); 
+// Output:
+// heroPower.deep(); 
+//           ^
+
+// TypeError: heroPower.deep is not a function
+
+// -----------------------------------------------------------------------------------------------------------------------------------
+// -----------------------------------------------------------------------------------------------------------------------------------
+
+// Prototype Inheritance:
+// In JavaScript, objects can inherit properties and methods from other objects.
+
+const User = {
+    isVerified: true,
+}
+
+const Teacher = {
+    subject: "JavaScript",
+}
+
+const TeachingSupport = {
+    isAvailable: true,
+}
+
+const TASupport = {
+    makeAssignment: "JS Assignment",
+    fullTime: true,
+    __proto__: TeachingSupport
+}
+
+// You can also define it outside the object:
+Teacher.__proto__ = User
+
+console.log(Teacher.isVerified); // true
+console.log(TASupport.isAvailable); // true
+
+// Modern Syntax:
+// (method) ObjectConstructor.setPrototypeOf(o: any, proto: object | null): any
+// Sets the prototype of a specified object o to object proto or null. Returns the object o.
+
+// @param o — The object to change its prototype.
+
+// @param proto — The value of the new prototype or null.
+Object.setPrototypeOf(Teacher, User);
+
+// Example:
+let anotherUsername = "JavaScriptCoureByChaiAurCode   "
+
+String.prototype.trueLength = function () {
+    console.log(this);
+    return this.trim().length;
+}
+
+console.log(anotherUsername.trueLength()); 
+// [String: 'JavaScriptCoureByChaiAurCode   '] --> Output of console.log(this);
+// 28
+
+console.log("Pavan".trueLength()); 
+// [String: 'Pavan'] --> Output of console.log(this);
+// 5
