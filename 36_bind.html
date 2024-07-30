@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture on Bind</title>
+</head>
+<body style="background-color: #212121; color: #fff;">
+    <button>Button Clicked</button>
+</body>
+<script>
+    class React{
+        constructor(){
+            this.library = "React";
+            this.server = "https://localhost:3000";
+
+            // Business Requirement: Once the page is loaded, we should get the reference of the button and something should happen when the button is clicked.
+            // document.querySelector("button").addEventListener("click", this.handleClick());
+
+            // Issue: The above code will not work because the context of "this" is lost. It is pointing to the button element and not the class instance.
+
+            document.querySelector("button").addEventListener("click", this.handleClick.bind(this));
+
+        }
+        
+        handleClick(){
+            console.log("Button Clicked");
+            
+            // Hack: this refers to Jiss ne call kiya. This <-> Jiss.
+            console.log(this); 
+            
+            // [Before Fixing the Code] Output: 
+            // <button>Button Clicked</button>
+            
+            // [After Fixing the Code] Output: 
+            // React {library: 'React', server: 'https://localhost:3000'}
+                // library: "React"
+                // server: "https://localhost:3000"
+                // [[Prototype]]: Object
+            
+                console.log(`Starting the server at ${this.server}`);
+        }
+    }
+
+    const app = new React();
+
+    // Output: 
+    // Button Clicked
+    // Starting the server at undefined
+
+    // Issue: We are getting undefined because the context of "this" is lost. It is pointing to the button element and not the class instance.
+
+    // How do you know that "this" is pointing to button element?
+    // In JavaScript, the value of "this" depends on the context in which a function is called. 
+    // When you add an event listener using addEventListener, the function specified as the callback is executed with "this" referring to the element on which the event listener was added.
+    // In Simple words:
+    // The handleClick function is added as an event listener to the button element. When the button is clicked, the function handleClick is executed. 
+    // In this context, "this" inside handleClick refers to the button element because "this" in event listeners refers to the element that received the event.
+
+    // Solution: Bind
+
+    // Bind: The bind() method creates a new function that, when called, has its "this" keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+</script>
+</html>
