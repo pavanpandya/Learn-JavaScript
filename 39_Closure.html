@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecture on Closure</title>
+</head>
+
+<body style="background-color: #212121; color: #fff;">
+    <button id="red">Red</button>
+    <button id="green">Green</button>
+    <button id="blue">Blue</button>
+</body>
+<script>
+    function main() {
+
+        let name = "Pavan"
+
+        function displayName() {
+            console.log(name);
+        }
+
+        displayName();
+    }
+
+    main();
+
+    function outer(){
+        let username = "Pavan"
+
+        function inner(){
+            let secret = "123"
+            console.log("This is inner", username);
+        }
+
+        function innerTwo(){
+            // ReferenceError: secret is not defined
+            // console.log(secret);
+            console.log("This is innerTwo", username);
+        }
+
+        inner();
+        innerTwo();
+    }
+
+    outer();
+
+    // Summary:
+    // 1. Lexical Scope is the scope of the function where it is defined.
+    // 2. Closure is the ability of the function to remember the lexical scope even when the function is executed outside the lexical scope.
+    // 3. Inner functions have access to the variables of the outer function.
+    // 4. Inner functions do not share the variables with other inner functions.
+
+    function makeFunc(){
+        const name = "Mdn"
+        function displayName(){
+            console.log(name);
+        }
+        return displayName;
+    }
+
+    const myFunc = makeFunc();
+    myFunc();
+
+    // Summary:
+    // We are not just returning the function, we are returning the function with the lexical scope.
+    // A closure gives you access to an outer function's scope from an inner function. 
+    // In JavaScript, closures are created every time a function is created, at function creation time.
+
+    // Real-World Usecase of Closure:
+    
+    // Without Closure:
+    // document.getElementById("red").addEventListener("click", function(){
+    //     document.body.style.backgroundColor = "red";
+    // });
+
+    // document.getElementById("green").addEventListener("click", function(){
+    //     document.body.style.backgroundColor = "green";
+    // });
+
+    // document.getElementById("blue").addEventListener("click", function(){
+    //     document.body.style.backgroundColor = "blue";
+    // });
+
+    // But if there are 100 of colors? We are not going to write 100 event listeners.
+
+    // With Closure:
+    function changeColor(color){
+        // Note:
+        // We cannnot do this because EventListener expects a function and not a value.
+        // Why function? Because it needs to execute the function when the event is triggered.
+        // document.body.style.backgroundColor = color;
+
+        return function(){
+            document.body.style.backgroundColor = color;
+        }
+    }
+
+    document.getElementById("red").addEventListener("click", changeColor("red"));
+    document.getElementById("green").addEventListener("click", changeColor("green"));
+    document.getElementById("blue").addEventListener("click", changeColor("blue"));
+
+</script>
+
+</html>
