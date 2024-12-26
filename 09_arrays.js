@@ -85,6 +85,12 @@ const dcHeroes = ["batman", "superman", "flash"]
 // Here, dcHeroes array is pushed as a single element into marvelHeroes array.
 // Why? Because push() method adds the element as it is.
 
+// Important Question: We used const to defined the array, then why it got modified when we use .push() on it.
+// Answer: When you declare a variable with const, it means the variable itself cannot be reassigned to a new value. 
+// This means you cannot do something like marvelHeroes = ["new", "array"]; because reassigning the reference is not allowed.
+// However, the contents of objects or arrays defined with const can still be modified, because const only protects the reference to the object or array, not its internal contents.
+// Takeaway: const prevents reassignment of the variable itself, but it does not make objects or arrays immutable.
+
 // Concat() method: Concatenates the array on which it is called with the array(s) and/or value(s) that it is provided as arguments and returns a new array.
 console.log(marvelHeroes.concat(dcHeroes));
 
