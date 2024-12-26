@@ -95,10 +95,34 @@ const dcHeroes = ["batman", "superman", "flash"]
 console.log(marvelHeroes.concat(dcHeroes));
 
 // Spread Operator: The spread operator is used to expand an array, object, or a string that is already created.
+// The spread operator performs a shallow copy. Nested objects or arrays are still referenced and not deeply copied.
 // Analogy to Remember: You drop a glass and it breaks into pieces.
 const allHeroes = [...marvelHeroes, ...dcHeroes];
 console.log(allHeroes);
 // Output: [ 'thor', 'ironman', 'spiderman', 'batman', 'superman', 'flash' ]
+
+// What Happens in a Shallow Copy?
+// Top-Level Elements:
+// For primitive values (like numbers, strings, booleans), the values are copied, so the original and copied objects/arrays are independent at this level.
+// Modifying a top-level element in one does not affect the other.
+
+// Nested Objects or Arrays:
+// For objects or arrays nested inside the original array/object, the reference to these nested elements is copied, not the actual values.
+// Modifying a nested object or array in one will affect the other because they share the same reference.
+
+// Example
+const original = [1, 2, { a: 3 }];
+const copy = [...original];
+
+// Modify a top-level element
+copy[0] = 99;
+console.log(original); // [1, 2, { a: 3 }]
+console.log(copy);     // [99, 2, { a: 3 }]
+
+// Modify a nested object
+copy[2].a = 42;
+console.log(original); // [1, 2, { a: 42 }]
+console.log(copy);     // [99, 2, { a: 42 }]
 
 // ------------------------------------------------------------------------
 
